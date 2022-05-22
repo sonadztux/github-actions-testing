@@ -1,6 +1,13 @@
 name: Hello Actions
-on: push
-
+on: 
+  push:
+  workflow_dispatch:
+    inputs:
+      yourName: 
+        description: "Who runs this workflow"
+        required: true
+        default: "You"
+      
 jobs:
   build:
     name: Hello Action
@@ -12,4 +19,4 @@ jobs:
       - name: Run Hello Action
         uses: ./hello-action
         with:
-          YOUR_NAME: "Jacob"
+          YOUR_NAME: ${{github.event.inputs.yourName}}
