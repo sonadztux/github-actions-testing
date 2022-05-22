@@ -1,0 +1,13 @@
+name: "Hello Actions"
+descripton: "A simple action to print a hello greeting'
+author: "sonadztux"
+
+inputs:
+  YOUR_NAME:
+    description: "Who runs this action"
+    required: true
+    default: "You"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
