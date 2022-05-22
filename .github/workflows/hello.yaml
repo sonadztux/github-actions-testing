@@ -1,4 +1,4 @@
-name: A workflow for my Hello Action
+name: Hello Actions
 on: push
 
 jobs:
