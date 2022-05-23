@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get Workflow ID ${{github.event.inputs.workflowId}} Information
+      - name: Get Workflow Information
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.SONADZTUX_GITHUB_ACTIONS_PAT }}
@@ -23,21 +23,35 @@ jobs:
               page: 1,
               per_page: 100
             })
-            console.log(workflowInfo)
+            console.log(workflowInfo.data)
             
       - name: List Runs In Workflow ID ${{github.event.inputs.workflowId}}
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.SONADZTUX_GITHUB_ACTIONS_PAT }}
           script: |
-            const listWorkflowRuns = await github.rest.actions.listWorkflowRuns({
+            const workflowRuns = await github.rest.actions.listWorkflowRuns({
               owner: 'sonadztux',
               repo: 'github-actions-testing',
               workflow_id: ${{github.event.inputs.workflowId}},
               page: 1,
               per_page: 100
             })
-            console.log(listWorkflowRuns.data.workflow_runs)
             
-            
-
+            for(let i=0; i < workflowRuns.data.workflow_runs.length; i++) {
+              const run_id = workflowRuns.data.workflow_runs[i].id
+              const run_name = workflowRuns.data.workflow_runs[i].name
+              const workflow_id = workflowRuns.data.workflow_runs[i].workflow_id
+              const created_at = workflowRuns.data.workflow_runs[i].created_at
+              const updated_at = workflowRuns.data.workflow_runs[i].created_at
+              const actor = workflowRuns.data.workflow_runs[i].triggering_actor.login
+              const head_commit_id = workflowRuns.data.workflow_runs[i].head_commit.id
+              
+              console.log(i+1 + "\trun_id: " + run_id)
+              console.log("\trun_name: " + run_name)
+              console.log("\tworkflow_id: " + workflow_id)
+              console.log("\tcreated_at: " + created_at)
+              console.log("\tupdated_at: " + updated_at)
+              console.log("\tactor: " + actor)
+              console.log("\thead_commit_id: " + head_commit_id)
+            }
