@@ -9,6 +9,8 @@ on:
 jobs:
   delete_failure_runs:
     runs-on: ubuntu-latest
+    env:
+      LIST_FAILURE_RUNS: ""
 
     steps:
       - name: List Failure Runs
@@ -22,4 +24,7 @@ jobs:
               repo: 'github-actions-testing',
               status: 'failure'
             })
-            console.log(runs.data.workflow_runs)
+            $LIST_FAILURE_RUNS = runs.data.workflow_runs
+      
+      - name: Delete Failure Runs
+        run: console.log($LIST_FAILURE_RUNS)
