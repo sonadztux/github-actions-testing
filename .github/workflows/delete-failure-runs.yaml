@@ -62,6 +62,7 @@ jobs:
               const run_name = runs.data.workflow_runs[i].name
               const workflow_id = runs.data.workflow_runs[i].workflow_id
               
+              console.log("Start deleting workflow run '"+ run_name + "' run id: " + run_id + " on workflow id: " + workflow_id + " successfully deleted."")
               const delete_runs = await github.rest.actions.deleteWorkflowRun({
                 owner: 'sonadztux',
                 repo: 'github-actions-testing',
