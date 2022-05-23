@@ -19,7 +19,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.SONADZTUX_GITHUB_ACTIONS_PAT }}
-          run: |
+          script: |
             console.log(`Workflow Actor: ${{github.event.inputs.workflowActor}}`)
             const runs = await github.rest.actions.listWorkflowRunsForRepo({
               owner: 'sonadztux',
@@ -28,5 +28,6 @@ jobs:
             })
             
       - name: Delete Failure Runs
-        with:
-          run: console.log(runs.data.workflow_runs)
+        with: 
+          script: |
+            console.log(runs.data.workflow_runs)
