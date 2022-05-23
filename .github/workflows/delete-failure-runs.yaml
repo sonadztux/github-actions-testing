@@ -20,6 +20,6 @@ jobs:
             const runs = await github.rest.actions.listWorkflowRunsForRepo({
               owner: 'sonadztux',
               repo: 'github-actions-testing',
-              status: 'failed'
+              status: 'failure'
             })
             console.log(runs.data.workflow_runs)
