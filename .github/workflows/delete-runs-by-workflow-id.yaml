@@ -8,6 +8,7 @@ on:
 
 jobs:
   delete_runs:
+    name: Delete Runs In Workflow ID {{github.event.inputs.workflowId}}
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +26,7 @@ jobs:
             })
             console.log(workflowInfo.data)
             
-      - name: List Runs In Workflow ID ${{github.event.inputs.workflowId}}
+      - name: List Workflow Runs
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.SONADZTUX_GITHUB_ACTIONS_PAT }}
