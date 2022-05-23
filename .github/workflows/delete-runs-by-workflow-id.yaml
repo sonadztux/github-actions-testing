@@ -39,19 +39,47 @@ jobs:
             })
             
             for(let i=0; i < workflowRuns.data.workflow_runs.length; i++) {
-              const run_id = workflowRuns.data.workflow_runs[i].id
-              const run_name = workflowRuns.data.workflow_runs[i].name
-              const workflow_id = workflowRuns.data.workflow_runs[i].workflow_id
-              const created_at = workflowRuns.data.workflow_runs[i].created_at
-              const updated_at = workflowRuns.data.workflow_runs[i].created_at
+              const runId = workflowRuns.data.workflow_runs[i].id
+              const runName = workflowRuns.data.workflow_runs[i].name
+              const workflowId = workflowRuns.data.workflow_runs[i].workflow_id
+              const createdAt = workflowRuns.data.workflow_runs[i].created_at
+              const updatedAt = workflowRuns.data.workflow_runs[i].created_at
               const actor = workflowRuns.data.workflow_runs[i].triggering_actor.login
-              const head_commit_id = workflowRuns.data.workflow_runs[i].head_commit.id
+              const headCommitId = workflowRuns.data.workflow_runs[i].head_commit.id
               
-              console.log(i+1 + "\trun_id: " + run_id)
-              console.log("\trun_name: " + run_name)
-              console.log("\tworkflow_id: " + workflow_id)
-              console.log("\tcreated_at: " + created_at)
-              console.log("\tupdated_at: " + updated_at)
+              console.log(i+1 + "\trun_id: " + runId)
+              console.log("\trun_name: " + runName)
+              console.log("\tworkflow_id: " + workflowId)
+              console.log("\tcreated_at: " + createdAt)
+              console.log("\tupdated_at: " + updatedAt)
               console.log("\tactor: " + actor)
-              console.log("\thead_commit_id: " + head_commit_id)
+              console.log("\thead_commit_id: " + headCommitId)
+            }
+
+            let fs = require('fs')
+            fs.writeFile("list_workflow_runs.json", JSON.stringify(workflowRuns.data.workflow_runs), function(err) {
+              if (err) {
+                console.log(err)
+              }
+            })
+
+      - name: Delete Workflow Runs
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.SONADZTUX_GITHUB_ACTIONS_PAT }}
+          script: |
+            const list_workflow_runs = require('./list_workflow_runs.json')
+            
+            for(let i=0; i < list_workflow_runs.length; i++) {
+              const runId = list_workflow_runs[i].id
+              const runName = list_workflow_runs[i].name
+              const workflowId = list_workflow_runs[i].workflow_id
+              
+              console.log("- Start deleting workflow run '"+ runName + "' run id: " + runId + " on workflow id: " + workflowId)
+              const delete_runs = await github.rest.actions.deleteWorkflowRun({
+                owner: 'sonadztux',
+                repo: 'github-actions-testing',
+                run_id: runId
+              })
+              console.log("  Workflow runs log successfully deleted.")
             }
