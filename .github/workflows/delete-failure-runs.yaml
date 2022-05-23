@@ -5,10 +5,6 @@ on:
       workflowActor: 
         description: "Who runs this workflow"
         required: true
-        default: "sonadztux"
-  # temp
-  push:
-    branches: [ master ]
 
 jobs:
   delete_failure_runs:
@@ -57,7 +53,7 @@ jobs:
       - name: Delete Failure Runs
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.CLOUD_PLATFORM_BOT_PAT }}
+          github-token: ${{ secrets.SONADZTUX_GITHUB_ACTIONS_PAT }}
           script: |
             const list_failure_runs = require('./list_failure_runs.json')
             
