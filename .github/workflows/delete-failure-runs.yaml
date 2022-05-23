@@ -27,7 +27,7 @@ jobs:
               status: 'failure'
             })
             
-            for(let i=1; i <= runs.data.workflow_runs.length; i++) {
+            for(let i=0; i < runs.data.workflow_runs.length; i++) {
               const run_id = runs.data.workflow_runs[i].id
               const run_name = runs.data.workflow_runs[i].name
               const workflow_id = runs.data.workflow_runs[i].workflow_id
@@ -36,6 +36,11 @@ jobs:
               const actor = runs.data.workflow_runs[i].triggering_actor.login
               const head_commit_id = runs.data.workflow_runs[i].head_commit.id
               
-              console.log(`$i.\truns_id: $run_id\n
-                        \trun_name: $run_name`)
+              console.log(i+1 + "\trun_id: " + run_id)
+              console.log("\trun_name: " + run_name)
+              console.log("\tworkflow_id: " + workflow_id)
+              console.log("\tcreated_at: " + created_at)
+              console.log("\tupdated_at: " + updated_at)
+              console.log("\tactor: " + actor)
+              console.log("\thead_commit_id: " + head_commit_id)
             }
