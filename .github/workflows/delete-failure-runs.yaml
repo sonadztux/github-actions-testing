@@ -57,7 +57,19 @@ jobs:
       - name: Delete Failure Runs
         uses: actions/github-script@v6
         with:
+          github-token: ${{ secrets.CLOUD_PLATFORM_BOT_PAT }}
           script: |
             const list_failure_runs = require('./list_failure_runs.json')
-            console.log(list_failure_runs[0].id)
-            console.log(list_failure_runs[0].name)
+            
+            for(let i=0; i < list_failure_runs.length; i++) {
+              const run_id = runs.data.workflow_runs[i].id
+              const run_name = runs.data.workflow_runs[i].name
+              const workflow_id = runs.data.workflow_runs[i].workflow_id
+              
+              const delete_runs = await github.rest.actions.deleteWorkflowRun({
+                owner: 'sonadztux',
+                repo: 'github-actions-testing',
+                run_id: run_id
+              })
+              console.log("Workflow run '"+ run_name + "' run id: " + run_id + " on workflow id: " + workflow_id + " successfully deleted.")
+            }
