@@ -5,6 +5,7 @@ on:
       workflowActor: 
         description: "Who runs this workflow"
         required: true
+        default: "sonadztux"
   # temp
   push:
     branches: [ master ]
