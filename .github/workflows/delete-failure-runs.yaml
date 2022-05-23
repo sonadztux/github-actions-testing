@@ -4,7 +4,7 @@ on:
     inputs:
       workflowActor: 
         description: "Who runs this workflow"
-        required: false
+        required: true
         default: "sonadztux"
   # temp
   push:
@@ -26,7 +26,7 @@ jobs:
               repo: 'github-actions-testing',
               status: 'failure'
             })
-      
+            
       - name: Delete Failure Runs
         with:
           run: console.log(runs.data.workflow_runs)
