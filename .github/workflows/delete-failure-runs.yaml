@@ -31,7 +31,6 @@ jobs:
               const run_id = runs.data.workflow_runs[i].id
               const run_name = runs.data.workflow_runs[i].name
               const workflow_id = runs.data.workflow_runs[i].workflow_id
-              const workflow_id = runs.data.workflow_runs[i].workflow_id
               const created_at = runs.data.workflow_runs[i].created_at
               const updated_at = runs.data.workflow_runs[i].created_at
               const actor = runs.data.workflow_runs[i].triggering_actor.login
