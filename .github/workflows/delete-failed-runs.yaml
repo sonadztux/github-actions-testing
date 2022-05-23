@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: List Failed Runs
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.SONADZTUX_GITHUB_ACTIONS_PAT }}
           script: |
