@@ -20,6 +20,8 @@ jobs:
         with:
           github-token: ${{ secrets.SONADZTUX_GITHUB_ACTIONS_PAT }}
           script: |
+            echo 'Hello'
+            
             console.log(`Workflow Actor: ${{github.event.inputs.workflowActor}}`)
             const runs = await github.rest.actions.listWorkflowRunsForRepo({
               owner: 'sonadztux',
@@ -46,3 +48,5 @@ jobs:
               console.log("\tactor: " + actor)
               console.log("\thead_commit_id: " + head_commit_id)
             }
+            
+            
