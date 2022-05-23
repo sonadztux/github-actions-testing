@@ -28,4 +28,5 @@ jobs:
             })
       
       - name: Delete Failure Runs
-        run: console.log(runs.data.workflow_runs)
+        with:
+          run: console.log(runs.data.workflow_runs)
