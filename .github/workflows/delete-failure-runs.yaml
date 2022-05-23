@@ -20,8 +20,6 @@ jobs:
         with:
           github-token: ${{ secrets.SONADZTUX_GITHUB_ACTIONS_PAT }}
           script: |
-            echo 'Hello'
-            
             console.log(`Workflow Actor: ${{github.event.inputs.workflowActor}}`)
             const runs = await github.rest.actions.listWorkflowRunsForRepo({
               owner: 'sonadztux',
@@ -49,4 +47,12 @@ jobs:
               console.log("\thead_commit_id: " + head_commit_id)
             }
             
-            
+            let fs = require('fs')
+            fs.writeFile("list_failure_runs.json", runs.data.workflow_runs, function(err) {
+              if (err) {
+                console.log(err)
+              }
+            }
+
+      - name: Delete Failure Runs
+        run: cat list_failure_runs.json
