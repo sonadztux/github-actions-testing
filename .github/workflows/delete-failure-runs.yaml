@@ -24,7 +24,9 @@ jobs:
             const runs = await github.rest.actions.listWorkflowRunsForRepo({
               owner: 'sonadztux',
               repo: 'github-actions-testing',
-              status: 'failure'
+              status: 'failure',
+              page: 1,
+              per_page: 100
             })
             
             for(let i=0; i < runs.data.workflow_runs.length; i++) {
