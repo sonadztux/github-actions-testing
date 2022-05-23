@@ -1,0 +1,25 @@
+name: Delete Failed Workflow Runs
+on:
+  workflow_dispatch:
+    inputs:
+      workflowActor: 
+        description: "Who runs this workflow"
+        required: true
+
+jobs:
+  delete_failed_runs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: List Failed Runs
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.SONANDZTUX_GUTHUB_ACTIONS_PAT }}
+          script: |
+            console.log(${{github.event.inputs.workflowActor}})
+            const runs = await github.rest.actions.listWorkflowRunsForRepo({
+              owner: 'sonadztux',
+              repo: 'github-actions-testing',
+              status: 'failed'
+            })
+            console.log(runs.data.workflow_runs)
