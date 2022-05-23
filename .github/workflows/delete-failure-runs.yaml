@@ -52,7 +52,7 @@ jobs:
               if (err) {
                 console.log(err)
               }
-            }
+            })
 
       - name: Delete Failure Runs
         run: cat list_failure_runs.json
