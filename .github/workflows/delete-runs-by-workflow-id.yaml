@@ -47,13 +47,13 @@ jobs:
               const actor = workflowRuns.data.workflow_runs[i].triggering_actor.login
               const headCommitId = workflowRuns.data.workflow_runs[i].head_commit.id
               
-              console.log(i+1 + "\trun_id: " + runId)
-              console.log("\trun_name: " + runName)
-              console.log("\tworkflow_id: " + workflowId)
-              console.log("\tcreated_at: " + createdAt)
-              console.log("\tupdated_at: " + updatedAt)
-              console.log("\tactor: " + actor)
-              console.log("\thead_commit_id: " + headCommitId)
+              console.log(i+1 + ". run_id: " + runId)
+              console.log("  run_name: " + runName)
+              console.log("  workflow_id: " + workflowId)
+              console.log("  created_at: " + createdAt)
+              console.log("  updated_at: " + updatedAt)
+              console.log("  actor: " + actor)
+              console.log("  head_commit_id: " + headCommitId)
             }
 
             let fs = require('fs')
