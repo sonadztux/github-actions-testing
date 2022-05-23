@@ -20,14 +20,14 @@ jobs:
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.SONADZTUX_GITHUB_ACTIONS_PAT }}
-          script: |
+          run: |
             console.log(`Workflow Actor: ${{github.event.inputs.workflowActor}}`)
             const runs = await github.rest.actions.listWorkflowRunsForRepo({
               owner: 'sonadztux',
               repo: 'github-actions-testing',
               status: 'failure'
             })
-            $LIST_FAILURE_RUNS = runs.data.workflow_runs
+            ${{env.LIST_FAILURE_RUNS}} = runs.data.workflow_runs
       
       - name: Delete Failure Runs
         run: console.log(`$LIST_FAILURE_RUNS`)
