@@ -48,7 +48,7 @@ jobs:
             }
             
             let fs = require('fs')
-            fs.writeFile("list_failure_runs.json", runs.data.workflow_runs, function(err) {
+            fs.writeFile("list_failure_runs.json", JSON.stringify(runs.data.workflow_runs), function(err) {
               if (err) {
                 console.log(err)
               }
