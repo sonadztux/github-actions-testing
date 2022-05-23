@@ -16,7 +16,7 @@ jobs:
         with:
           github-token: ${{ secrets.SONADZTUX_GITHUB_ACTIONS_PAT }}
           script: |
-            console.log(`${{github.event.inputs.workflowActor}}`)
+            console.log(`Workflow Actor: ${{github.event.inputs.workflowActor}}`)
             const runs = await github.rest.actions.listWorkflowRunsForRepo({
               owner: 'sonadztux',
               repo: 'github-actions-testing',
