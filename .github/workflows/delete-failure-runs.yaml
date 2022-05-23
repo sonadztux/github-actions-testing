@@ -27,4 +27,4 @@ jobs:
             $LIST_FAILURE_RUNS = runs.data.workflow_runs
       
       - name: Delete Failure Runs
-        run: console.log($LIST_FAILURE_RUNS)
+        run: console.log(`$LIST_FAILURE_RUNS`)
