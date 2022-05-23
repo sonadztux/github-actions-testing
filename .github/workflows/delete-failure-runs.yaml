@@ -26,6 +26,7 @@ jobs:
               repo: 'github-actions-testing',
               status: 'failure'
             })
+            echo "LIST_FAILURE_RUNS=$(console.log(runs.data.workflow_runs))" >> $GITHUB_ENV
             
       - name: Delete Failure Runs
-        run: console.log(runs.data.workflow_runs)
+        run: console.log(`${{ env.LIST_FAILURE_RUNS }}`)
