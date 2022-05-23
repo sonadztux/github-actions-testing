@@ -8,7 +8,7 @@ on:
 
 jobs:
   delete_runs:
-    name: Delete Runs In Workflow ID {{github.event.inputs.workflowId}}
+    name: Delete Runs In Workflow ID ${{github.event.inputs.workflowId}}
     runs-on: ubuntu-latest
 
     steps:
