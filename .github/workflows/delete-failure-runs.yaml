@@ -1,4 +1,4 @@
-name: Delete Failed Workflow Runs
+name: Delete Failure Workflow Runs
 on:
   workflow_dispatch:
     inputs:
@@ -7,11 +7,11 @@ on:
         required: true
 
 jobs:
-  delete_failed_runs:
+  delete_failure_runs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: List Failed Runs
+      - name: List Failure Runs
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.SONADZTUX_GITHUB_ACTIONS_PAT }}
