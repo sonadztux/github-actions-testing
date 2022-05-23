@@ -55,6 +55,7 @@ jobs:
             })
 
       - name: Delete Failure Runs
+        uses: actions/github-script@v6
         with:
           script: |
             const list_failure_runs = require('list_failure_runs.json')
