@@ -5,6 +5,9 @@ on:
       workflowActor: 
         description: "Who runs this workflow"
         required: true
+  # temp
+  push:
+    branches: [ master ]
 
 jobs:
   delete_failure_runs:
