@@ -4,7 +4,7 @@ on:
     inputs:
       workflowActor: 
         description: "Who runs this workflow"
-        required: true
+        required: false
         default: "sonadztux"
   # temp
   push:
