@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       workflowActor: 
-        description: "Who runs this workflow"
+        description: "Who runs this workflow run"
         required: true
 
 jobs:
@@ -62,11 +62,11 @@ jobs:
               const run_name = list_failure_runs[i].name
               const workflow_id = list_failure_runs[i].workflow_id
               
-              console.log("Start deleting workflow run '"+ run_name + "' run id: " + run_id + " on workflow id: " + workflow_id)
+              console.log("- Start deleting workflow run '"+ run_name + "' run id: " + run_id + " on workflow id: " + workflow_id)
               const delete_runs = await github.rest.actions.deleteWorkflowRun({
                 owner: 'sonadztux',
                 repo: 'github-actions-testing',
                 run_id: run_id
               })
-              console.log("Workflow run log successfully deleted.")
+              console.log("  Workflow run log successfully deleted.")
             }
