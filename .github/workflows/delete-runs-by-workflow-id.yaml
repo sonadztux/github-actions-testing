@@ -30,9 +30,8 @@ jobs:
             const blacklistedIds = ['26591704', '26641895', '26641560']
             const isBlacklistedId = blacklistedIds.includes('${{github.event.inputs.workflowId}}')
             console.log(isBlacklistedId)
-            if(isBlacklistedId) {
-              core.setFailed('Workflow id: ' + ${{github.event.inputs.workflowId}} + ' can't be deleted!')
-            }
+            if(isBlacklistedId) 
+              core.setFailed("Workflow id: " + ${{github.event.inputs.workflowId}} + " can't be deleted!")
             
       - name: List Workflow Runs
         uses: actions/github-script@v6
