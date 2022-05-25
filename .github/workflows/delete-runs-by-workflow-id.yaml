@@ -10,6 +10,9 @@ jobs:
   delete_runs:
     name: Delete Runs In Workflow ID ${{github.event.inputs.workflowId}}
     runs-on: ubuntu-latest
+    #runs-on: [runnerset=default-runners, env=staging]
+    #environment:
+      # name: Github Actions - Delete Workflow Runs
 
     steps:
       - name: Get Workflow Information
@@ -20,11 +23,14 @@ jobs:
             const workflowInfo = await github.rest.actions.getWorkflow({
               owner: 'sonadztux',
               repo: 'github-actions-testing',
-              workflow_id: ${{github.event.inputs.workflowId}},
-              page: 1,
-              per_page: 100
+              workflow_id: ${{github.event.inputs.workflowId}}
             })
             console.log(workflowInfo.data)
+            
+            const whitelistedWorkflowIds = ['26591704', '26641895', '26641560']
+            if( whitelistedWorkflowIds.includes(${{github.event.inputs.workflowId}} ) {
+              core.setFailed('Workflow id: ' + ${{github.event.inputs.workflowId}} + ' can't be deleted!')
+            }
             
       - name: List Workflow Runs
         uses: actions/github-script@v6
@@ -44,7 +50,7 @@ jobs:
               const runName = workflowRuns.data.workflow_runs[i].name
               const workflowId = workflowRuns.data.workflow_runs[i].workflow_id
               const createdAt = workflowRuns.data.workflow_runs[i].created_at
-              const updatedAt = workflowRuns.data.workflow_runs[i].created_at
+              const updatedAt = workflowRuns.data.workflow_runs[i].updated_at
               const actor = workflowRuns.data.workflow_runs[i].triggering_actor.login
               const headCommitId = workflowRuns.data.workflow_runs[i].head_commit.id
               
