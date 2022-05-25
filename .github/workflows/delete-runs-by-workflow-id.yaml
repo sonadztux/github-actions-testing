@@ -28,7 +28,7 @@ jobs:
             console.log(workflowInfo.data)
             
             const whitelistedWorkflowIds = ['26591704', '26641895', '26641560']
-            if( whitelistedWorkflowIds.includes(${{github.event.inputs.workflowId}}) ) {
+            if( whitelistedWorkflowIds.includes('${{github.event.inputs.workflowId}}') ) {
               core.setFailed('Workflow id: ' + ${{github.event.inputs.workflowId}} + ' can't be deleted!')
             }
             
